@@ -3,7 +3,7 @@ import java.util.*;
 public class AllOne {
     Map<String, Integer> wordCount = new HashMap<>();
     Deque<Integer> maxIndex = new ArrayDeque<>();
-    Node[] nodes = new Node[10_000];
+    Node[] nodes = new Node[100_000];
     Node maxNode = null;
     Node minNode = null;
 
@@ -33,6 +33,12 @@ public class AllOne {
                if(nodes[c].prev != null) {
                    nodes[c].prev.next = nodes[c];
                }
+               nodes[c - 1] = null; //needed?
+           }
+       }else {
+           if(minNode != null && minNode.index != 1){
+               nodes[c].next = minNode;
+               minNode.prev = nodes[c];
            }
        }
 
